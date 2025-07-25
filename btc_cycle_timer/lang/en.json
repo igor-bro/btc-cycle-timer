@@ -1,6 +1,13 @@
 {
-  "app.title": "Bitcoin Cycle Timer",
-  "timer.halving": "Until halving",
-  "timer.peak": "Until cycle peak",
-  "timer.bottom": "Until cycle bottom"
+  "app.title": "Bitcoin 4-Year Cycle Timer",
+  "table.label": "Metric",
+  "table.value": "Value",
+  "timer.halving": "Time to next halving",
+  "timer.peak": "Time to projected peak",
+  "timer.bottom": "Time to projected bottom",
+  "chart.title": "📈 BTC 4-Year Cycle Phases",
+  "disclaimer": "⚠️ This is an educational tool. Not financial advice. Past performance is not a guarantee of future results.",
+  "chart.x_axis": "Date",
+  "chart.y_axis": "Phase",
+  "chart.legend": "Phases"
 }

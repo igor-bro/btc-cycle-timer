@@ -1,6 +1,13 @@
 {
-  "app.title": "Minuteur du cycle Bitcoin",
-  "timer.halving": "Jusqu'au halving",
-  "timer.peak": "Jusqu'au sommet",
-  "timer.bottom": "Jusqu'au creux"
+  "app.title": "Minuteur du cycle Bitcoin sur 4 ans",
+  "table.label": "Indicateur",
+  "table.value": "Valeur",
+  "timer.halving": "Temps avant le prochain halving",
+  "timer.peak": "Temps avant le pic prévu",
+  "timer.bottom": "Temps avant le creux prévu",
+  "chart.title": "📈 Phases du cycle BTC sur 4 ans",
+  "disclaimer": "⚠️ Outil éducatif uniquement. Pas de conseil financier. Les performances passées ne garantissent pas les résultats futurs.",
+  "chart.x_axis": "Date",
+  "chart.y_axis": "Phase",
+  "chart.legend": "Phases"
 }
