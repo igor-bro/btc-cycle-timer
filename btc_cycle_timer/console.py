@@ -1,3 +1,5 @@
+#console.py
+
 from rich.console import Console
 from rich.table import Table
 from rich.columns import Columns

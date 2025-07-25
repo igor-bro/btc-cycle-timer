@@ -12,11 +12,14 @@
   "chart.legend": "Фази",
   "progress.title": "📉 Прогрес циклу",
   "progress.caption": "{percent}% шляху до піку пройдено",
-  "progress.stats": "📊 Статистика циклу",
-  "stat.days_from_bottom": "Днів від дна",
-  "stat.percent_progress": "Прогрес до піку",
-  "stat.roi_from_bottom": "ROI від дна",
-  "stat.roi_to_peak": "ROI до піку",
-  "stat.roi_bottom_to_peak": "ROI від дна до піку",
-  "stat.current_price": "Актуальна ціна"
+  "telegram.stats": "Статистика циклу",
+  "stats.days_from_bottom": "Днів від дна",
+  "stats.percent_progress": "Прогрес до піку",
+  "stats.roi_from_bottom": "ROI від дна",
+  "stats.roi_to_peak": "ROI до піку",
+  "stats.roi_bottom_to_peak": "ROI від дна до піку",
+  "stats.forecast_peak_price": "Прогнозована ціна на піку",
+  "stats.forecast_bottom_price": "Прогнозована ціна на дні",
+  "price.current": "Актуальна ціна",
+  "unit.days": "днів"
 }

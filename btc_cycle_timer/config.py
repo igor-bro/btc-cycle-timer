@@ -1,3 +1,5 @@
+#config.py
+
 from datetime import date
 
 # Дати ключових подій
