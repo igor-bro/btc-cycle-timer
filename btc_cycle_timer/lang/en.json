@@ -1,0 +1,6 @@
+{
+  "app.title": "Bitcoin Cycle Timer",
+  "timer.halving": "Until halving",
+  "timer.peak": "Until cycle peak",
+  "timer.bottom": "Until cycle bottom"
+}
