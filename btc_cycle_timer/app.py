@@ -206,10 +206,10 @@ with col_lang:
     lang_idx = st.selectbox("🌐 Language", lang_labels, key="lang_select_inline", index=lang_codes.index("en"))
     lang = LANGS[lang_labels.index(lang_idx)]["code"]
 with col_btn:
-    st.markdown("<div style='text-align: right; font-size: 0.95em; color: #b0b8c9; margin-bottom: 0.2em;'>BTC timer</div>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align: left; font-size: 0.95em; color: #b0b8c9; margin-bottom: 0.2em;'>⏱️ 1BTC = 1BTC</div>", unsafe_allow_html=True)
     refresh_clicked = st.button(localize('refresh', 'en') if localize('refresh', 'en') != 'refresh' else '🔄 Refresh page', key="refresh_btn")
 if refresh_clicked:
-    st.experimental_rerun()
+    st.rerun()
 st.markdown('</div>', unsafe_allow_html=True)
 
 # --- Data ---

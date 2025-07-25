@@ -12,7 +12,7 @@
   "chart.legend": "Phases",
   "progress.title": "📉 Cycle Progress",
   "progress.caption": "{percent}% of the path to peak completed",
-  "telegram.stats": "Cycle Stats",
+  "telegram.stats": "Cycle Stats and Forecastes",
   "stats.days_from_bottom": "Days since bottom",
   "stats.percent_progress": "Progress to peak",
   "stats.roi_from_bottom": "ROI from bottom",

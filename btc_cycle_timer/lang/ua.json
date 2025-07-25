@@ -12,7 +12,7 @@
   "chart.legend": "Фази",
   "progress.title": "📉 Прогрес циклу",
   "progress.caption": "{percent}% шляху до піку пройдено",
-  "telegram.stats": "Статистика циклу",
+  "telegram.stats": "Статистика циклу і прогнози",
   "stats.days_from_bottom": "Днів від дна",
   "stats.percent_progress": "Прогрес до піку",
   "stats.roi_from_bottom": "ROI від дна",
