@@ -1,0 +1,15 @@
+# Text files
+*.py text
+*.md text
+*.json text
+*.toml text
+*.html text
+*.css text
+*.js text
+*.env text
+
+# Treat shell scripts as UTF-8
+*.sh text eol=lf
+
+# Force consistent line endings for all environments
+* text=auto eol=lf
