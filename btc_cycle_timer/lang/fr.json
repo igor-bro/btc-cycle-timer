@@ -1,13 +1,22 @@
 {
-  "app.title": "Minuteur du cycle Bitcoin sur 4 ans",
+  "app.title": "Minuteur du cycle de 4 ans du Bitcoin",
   "table.label": "Indicateur",
   "table.value": "Valeur",
-  "timer.halving": "Temps avant le prochain halving",
-  "timer.peak": "Temps avant le pic prévu",
-  "timer.bottom": "Temps avant le creux prévu",
+  "timer.halving": "Jusqu'au prochain halving",
+  "timer.peak": "Jusqu'au sommet prévu",
+  "timer.bottom": "Jusqu'au creux prévu",
   "chart.title": "📈 Phases du cycle BTC sur 4 ans",
-  "disclaimer": "⚠️ Outil éducatif uniquement. Pas de conseil financier. Les performances passées ne garantissent pas les résultats futurs.",
+  "disclaimer": "⚠️ Cet outil est à but éducatif. Ce n'est pas un conseil financier. L'historique du marché ne garantit pas les résultats futurs.",
   "chart.x_axis": "Date",
   "chart.y_axis": "Phase",
-  "chart.legend": "Phases"
+  "chart.legend": "Phases",
+  "progress.title": "📉 Progression du cycle",
+  "progress.caption": "{percent}% du chemin vers le sommet",
+  "progress.stats": "📊 Statistiques du cycle",
+  "stat.days_from_bottom": "Jours depuis le bas",
+  "stat.percent_progress": "Progression vers le sommet",
+  "stat.roi_from_bottom": "ROI depuis le bas",
+  "stat.roi_to_peak": "ROI jusqu'au sommet",
+  "stat.roi_bottom_to_peak": "ROI du bas au sommet",
+  "stat.current_price": "Prix actuel"
 }
