@@ -13,6 +13,36 @@ LIMIT = 366
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 os.makedirs(DATA_DIR, exist_ok=True)
 
+def get_btc_price():
+    """
+    Повертає актуальну ціну BTC (Binance API), або останню з CSV.
+    """
+    try:
+        params = {
+            "symbol": SYMBOL,
+            "interval": INTERVAL,
+            "limit": 1
+        }
+        response = requests.get(BINANCE_URL, params=params, timeout=5)
+        response.raise_for_status()
+        kline = response.json()[0]
+        price = float(kline[4])
+        return price
+    except Exception:
+        # Якщо API недоступний — беремо останню ціну з CSV
+        files = [f for f in os.listdir(DATA_DIR) if f.startswith("btc_price_") and f.endswith(".csv")]
+        dfs = []
+        for f in files:
+            df = pd.read_csv(os.path.join(DATA_DIR, f))
+            if "close" in df.columns:
+                df = df.rename(columns={"close": "price"})
+            dfs.append(df)
+        if dfs:
+            all_df = pd.concat(dfs).sort_values("date")
+            return float(all_df["price"].iloc[-1])
+        else:
+            return None
+
 def fetch_btc_data(start_year: int, end_year: int):
     for year in range(start_year, end_year + 1):
         print(f"🔄 Loading {year}...")

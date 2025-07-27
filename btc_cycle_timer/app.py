@@ -180,15 +180,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Languages ---
-LANGS = [
-    {"code": "ua", "label": "🇺🇦 Українська"},
-    {"code": "en", "label": "🇬🇧 English"},
-    {"code": "fr", "label": "🇫🇷 Français"},
-]
-lang_codes = [l["code"] for l in LANGS]
-lang_labels = [l["label"] for l in LANGS]
-
 # --- Improved localize with fallback and formatting ---
 def localize(key, lang, **kwargs):
     val = base_localize(key, lang)
@@ -199,18 +190,30 @@ def localize(key, lang, **kwargs):
     except Exception:
         return val
 
-# --- Top bar: Language selector (left) + Refresh button (right, bottom aligned) ---
-st.markdown('<div class="topbar-flex">', unsafe_allow_html=True)
-col_lang, col_btn = st.columns([3, 1], gap="small")
-with col_lang:
-    lang_idx = st.selectbox("🌐 Language", lang_labels, key="lang_select_inline", index=lang_codes.index("en"))
-    lang = LANGS[lang_labels.index(lang_idx)]["code"]
-with col_btn:
-    st.markdown("<div style='text-align: left; font-size: 0.95em; color: #b0b8c9; margin-bottom: 0.2em;'>⏱️ 1BTC = 1BTC</div>", unsafe_allow_html=True)
-    refresh_clicked = st.button(localize('refresh', 'en') if localize('refresh', 'en') != 'refresh' else '🔄 Refresh page', key="refresh_btn")
-if refresh_clicked:
-    st.rerun()
-st.markdown('</div>', unsafe_allow_html=True)
+# --- Language selector with URL query support ---
+lang_options = {
+    "🇺🇦 Українська": "ua",
+    "🇬🇧 English": "en",
+    "🇫🇷 Français": "fr",
+}
+
+# Отримати мову з query_params (якщо є)
+query_params = st.query_params 
+initial_lang = query_params.get("lang", [st.session_state.get("lang", "en")])[0]
+
+# Визначити початкову мову для selectbox
+initial_index = list(lang_options.values()).index(initial_lang)
+selected_label = st.selectbox(
+    label="",
+    options=list(lang_options.keys()),
+    index=initial_index,
+    label_visibility="collapsed"
+)
+
+# Оновити мову
+lang = lang_options[selected_label]
+st.session_state["lang"] = lang
+
 
 # --- Data ---
 timers = get_all_timers()
@@ -253,9 +256,20 @@ progress_bar_html = f"""
 st.markdown(progress_bar_html, unsafe_allow_html=True)
 
 # --- Chart of cycle phases ---
+st.markdown("""
+    <style>
+    .full-width-chart .element-container {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+    }
+    </style>
+""", unsafe_allow_html=True)
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
-# Прибрано зайвий заголовок (залишилося лише один)
+st.markdown('<div class="full-width-chart">', unsafe_allow_html=True)
 st.plotly_chart(plot_cycle_phases(lang=lang), use_container_width=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- Cycle stats ---
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
@@ -299,3 +313,7 @@ for col, blocks in zip(stat_cols, stat_blocks):
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 st.markdown("---")
 st.markdown(f"<div class='disclaimer'>{localize('disclaimer', lang)}</div>", unsafe_allow_html=True)
+
+st.markdown("---")
+# --- Analogy text (footer.analogy) ---
+st.markdown(f"<div class='disclaimer' style='margin-top: 2em;'>{localize('footer.analogy', lang)}</div>", unsafe_allow_html=True)

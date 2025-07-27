@@ -19,6 +19,7 @@ def get_forecast_dates():
     - халвінг (halving)
     """
     base_dates = {
+        "halving_prev": datetime(2024, 4, 19),
         "halving": datetime(2028, 4, 20),
         "peak": datetime(2025, 10, 11),
         "bottom": datetime(2026, 10, 30),

@@ -21,3 +21,6 @@ dependencies = [
 [project.scripts]
 btc-cycle = "btc_cycle_timer.__main__:main"
 
+[tool.pytest.ini_options]
+addopts = "--md-report tests/report.md"
+

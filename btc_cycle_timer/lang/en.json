@@ -21,5 +21,7 @@
   "stats.forecast_peak_price": "Forecasted peak price",
   "stats.forecast_bottom_price": "Forecasted bottom price",
   "price.current": "Current price",
-  "unit.days": "days"
+  "unit.days": "days",
+  "chart.price": "BTC Price",
+  "footer.analogy": "An analogy to understand: Imagine you're planning a train journey. The 'BTC Cycle Timer' is your personal interactive schedule, not only showing the current time, but also forecasting when the train will arrive at the 'peak' station, reach the 'bottom', and make the next 'refueling stop' (halving). It also provides a route map (cycle chart) and a passenger handbook (analytical sections), explaining possible influencing factors and reminding you this is just a forecast – not a guaranteed timetable."
 }

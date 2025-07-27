@@ -21,5 +21,7 @@
   "stats.forecast_peak_price": "Prix prévu au sommet",
   "stats.forecast_bottom_price": "Prix prévu au creux",
   "price.current": "Prix actuel",
-  "unit.days": "jours"
+  "unit.days": "jours",
+  "chart.price": "Prix BTC",
+  "footer.analogy": "Une analogie pour mieux comprendre : Imaginez que vous planifiez un voyage en train. Le \"BTC Cycle Timer\" est votre horaire interactif personnel qui non seulement indique l'heure actuelle, mais prévoit également quand le train arrivera à la station de \"pic\", atteindra le \"creux\" et effectuera son prochain \"arrêt ravitaillement\" (halving). Il fournit aussi une carte du trajet (graphique des cycles) et un guide du passager (sections d'analyse), expliquant les facteurs possibles et rappelant que ce n'est qu'une prévision, pas une garantie."
 }
