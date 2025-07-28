@@ -5,6 +5,10 @@ from btc_cycle_timer.chart import plot_cycle_phases
 from btc_cycle_timer.calc import calculate_cycle_stats
 from btc_cycle_timer.status import get_progress_bar
 from datetime import datetime, timedelta
+from btc_cycle_timer.chart import plot_pattern_projection
+
+
+
 
 # --- Custom CSS for better visuals, responsiveness, and animation ---
 st.markdown("""
@@ -197,20 +201,27 @@ lang_options = {
     "🇫🇷 Français": "fr",
 }
 
-# Отримати мову з query_params (якщо є)
-query_params = st.query_params 
-initial_lang = query_params.get("lang", [st.session_state.get("lang", "en")])[0]
+# Get language from query_params (if available)
+try:
+    query_params = st.query_params
+    initial_lang = query_params.get("lang", st.session_state.get("lang", "en"))
+except:
+    initial_lang = st.session_state.get("lang", "en")
 
-# Визначити початкову мову для selectbox
-initial_index = list(lang_options.values()).index(initial_lang)
+# Determine initial language for selectbox
+try:
+    initial_index = list(lang_options.values()).index(initial_lang)
+except ValueError:
+    # If language not found, use English
+    initial_index = list(lang_options.values()).index("en")
 selected_label = st.selectbox(
-    label="",
+    label="Language",
     options=list(lang_options.keys()),
     index=initial_index,
     label_visibility="collapsed"
 )
 
-# Оновити мову
+# Update language
 lang = lang_options[selected_label]
 st.session_state["lang"] = lang
 
@@ -255,6 +266,13 @@ progress_bar_html = f"""
 """
 st.markdown(progress_bar_html, unsafe_allow_html=True)
 
+# --- Optional: Add pattern projection ---
+show_pattern_projection = st.checkbox(
+    localize("chart.show_pattern_projection", lang),
+    value=True,
+    help=localize("chart.show_pattern_projection.tooltip", lang, default="Enable to show the projected pattern based on historical cycles.")
+)
+
 # --- Chart of cycle phases ---
 st.markdown("""
     <style>
@@ -268,8 +286,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 st.markdown('<div class="full-width-chart">', unsafe_allow_html=True)
-st.plotly_chart(plot_cycle_phases(lang=lang), use_container_width=True)
+
+fig = plot_cycle_phases(lang=lang, show_projection=show_pattern_projection)
+
+st.plotly_chart(fig, use_container_width=True)
 st.markdown('</div>', unsafe_allow_html=True)
+
 
 # --- Cycle stats ---
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)

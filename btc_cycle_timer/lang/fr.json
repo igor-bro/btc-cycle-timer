@@ -1,27 +1,52 @@
 {
-  "app.title": "Minuteur du cycle Bitcoin de 4 ans",
-  "table.label": "Indicateur",
+  "app.title": "Minuteur du cycle Bitcoin sur 4 ans",
+  "table.label": "Métrique",
   "table.value": "Valeur",
+
   "timer.halving": "Jusqu'au prochain halving",
   "timer.peak": "Jusqu'au sommet prévu",
   "timer.bottom": "Jusqu'au creux prévu",
+
   "chart.title": "📈 Phases du cycle BTC de 4 ans",
-  "disclaimer": "⚠️ Outil éducatif. Ce n'est pas un conseil financier. Les performances passées ne garantissent pas les résultats futurs.",
   "chart.x_axis": "Date",
   "chart.y_axis": "Phase",
-  "chart.legend": "Phases",
-  "progress.title": "📉 Progression du cycle",
-  "progress.caption": "{percent}% du chemin vers le sommet effectué",
-  "telegram.stats": "Statistiques du cycle",
+
+  "line.btc_price": "Prix du BTC",
+  "line.prev_bottom": "Niveau du creux précédent",
+  "line.forecasted_peak_level": "Niveau du sommet prévu",
+  "line.forecasted_bottom_level": "Niveau du creux prévu",
+
+  "event.bottom": "📉 Creux",
+  "event.halving": "📆 Halving",
+  "event.peak": "🚀 Sommet prévu",
+  "event.bottom_forecast": "📉 Creux prévu",
+
+  "phase.accumulation": "Accumulation",
+  "phase.parabolic": "Parabolique",
+  "phase.distribution": "Distribution",
+  "phase.capitulation": "Capitulation",
+
+  "disclaimer": "⚠️ Outil éducatif. Pas un conseil financier. Les performances passées ne garantissent pas les résultats futurs.",
+
+  "telegram.stats": "Statistiques et prévisions du cycle",
   "stats.days_from_bottom": "Jours depuis le creux",
   "stats.percent_progress": "Progression vers le sommet",
   "stats.roi_from_bottom": "ROI depuis le creux",
   "stats.roi_to_peak": "ROI jusqu'au sommet",
-  "stats.roi_bottom_to_peak": "ROI creux à sommet",
-  "stats.forecast_peak_price": "Prix prévu au sommet",
-  "stats.forecast_bottom_price": "Prix prévu au creux",
+  "stats.roi_bottom_to_peak": "ROI du creux au sommet",
+  "stats.forecast_peak_price": "Prix du sommet prévu",
+  "stats.forecast_bottom_price": "Prix du creux prévu",
   "price.current": "Prix actuel",
+
+  "progress.title": "📉 Progression du cycle",
+  "progress.caption": "{percent}% du chemin vers le sommet parcouru",
+
   "unit.days": "jours",
-  "chart.price": "Prix BTC",
-  "footer.analogy": "Une analogie pour mieux comprendre : Imaginez que vous planifiez un voyage en train. Le \"BTC Cycle Timer\" est votre horaire interactif personnel qui non seulement indique l'heure actuelle, mais prévoit également quand le train arrivera à la station de \"pic\", atteindra le \"creux\" et effectuera son prochain \"arrêt ravitaillement\" (halving). Il fournit aussi une carte du trajet (graphique des cycles) et un guide du passager (sections d'analyse), expliquant les facteurs possibles et rappelant que ce n'est qu'une prévision, pas une garantie."
+  "chart.legend": "Phases",
+
+  "chart.show_pattern_projection": "Afficher la projection du modèle",
+  "chart.show_pattern_projection.tooltip": "Activer pour afficher la projection du modèle basée sur les cycles historiques",
+  "line.pattern_projection": "Projection du modèle",
+
+  "footer.analogy": "Une analogie pour comprendre : Imaginez que vous planifiez un voyage en train. Le 'BTC Cycle Timer' est votre horaire interactif personnel, vous montrant non seulement l'heure actuelle, mais aussi les prévisions d'arrivée à la station 'sommet', au 'creux', et à la prochaine 'pause ravitaillement' (halving). Il fournit aussi une carte (graphique du cycle) et un guide du passager (sections analytiques), tout en rappelant qu'il s'agit seulement de prévisions — pas d'un horaire garanti."
 }

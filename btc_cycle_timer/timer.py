@@ -1,3 +1,5 @@
+# timer.py
+
 from datetime import date
 from btc_cycle_timer.config import NEXT_HALVING, CYCLE_PEAK, CYCLE_BOTTOM
 from datetime import datetime, timedelta
@@ -18,11 +20,13 @@ def get_forecast_dates():
     - дно (bottom)
     - халвінг (halving)
     """
+    from .config import LAST_HALVING, NEXT_HALVING, FORECAST_PEAK_DATE, FORECAST_BOTTOM_DATE
+    
     base_dates = {
-        "halving_prev": datetime(2024, 4, 19),
-        "halving": datetime(2028, 4, 20),
-        "peak": datetime(2025, 10, 11),
-        "bottom": datetime(2026, 10, 30),
+        "halving_prev": datetime.combine(LAST_HALVING, datetime.min.time()),
+        "halving": datetime.combine(NEXT_HALVING, datetime.min.time()),
+        "peak": FORECAST_PEAK_DATE,
+        "bottom": FORECAST_BOTTOM_DATE,
     }
     now = datetime.utcnow()
     return {
@@ -41,3 +45,6 @@ def get_all_timers() -> dict:
         "peak": days_until(CYCLE_PEAK),
         "bottom": days_until(CYCLE_BOTTOM),
     }
+
+# Експорт функцій
+__all__ = ['get_all_timers', 'get_timer_dates', 'get_forecast_dates', 'days_until']

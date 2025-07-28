@@ -1,29 +1,19 @@
+#calc.py
+
 from datetime import datetime
-import requests
+from .price import get_btc_price
+from .config import (
+    CYCLE_BOTTOM_DATE, FORECAST_PEAK_DATE, BOTTOM_PRICE, PEAK_PRICE,
+    FORECAST_PEAK_PRICE, FORECAST_BOTTOM_PRICE
+)
 
-# Історичні дати
-CYCLE_BOTTOM_DATE = datetime(2022, 11, 22)
-CYCLE_PEAK_DATE = datetime(2025, 10, 15)
-
-# Історичні ціни
-BOTTOM_PRICE = 15700
-PEAK_PRICE = None  # ще не відомо
-
-# Прогнозовані ціни
-FORECAST_PEAK_PRICE = 200000
-FORECAST_BOTTOM_PRICE = 75000
+# Експорт функцій
+__all__ = ['get_current_btc_price', 'calculate_cycle_stats']
 
 
 def get_current_btc_price() -> float:
-    try:
-        url = "https://api.binance.com/api/v3/ticker/price"
-        params = {"symbol": "BTCUSDT"}
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        return float(response.json()["price"])
-    except Exception as e:
-        print(f"⚠️ Binance API error: {e}")
-        return None 
+    """Аліас для get_btc_price з модуля price"""
+    return get_btc_price() 
 
 def calculate_cycle_stats():
     today = datetime.utcnow()
@@ -40,7 +30,7 @@ def calculate_cycle_stats():
 
 
     days_from_bottom = (today - CYCLE_BOTTOM_DATE).days
-    total_cycle_days = (CYCLE_PEAK_DATE - CYCLE_BOTTOM_DATE).days
+    total_cycle_days = (FORECAST_PEAK_DATE - CYCLE_BOTTOM_DATE).days
     percent_progress = round(days_from_bottom / total_cycle_days * 100, 2)
 
     roi_from_bottom = round((current_price - BOTTOM_PRICE) / BOTTOM_PRICE * 100, 2)

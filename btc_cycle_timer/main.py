@@ -13,13 +13,13 @@ def main():
     parser.add_argument("--lang", default="en", choices=["ua", "en", "fr"])
     args = parser.parse_args()
     
-    # Дані
+    # Data
     timers = get_all_timers()
     price = get_btc_price()
     stats = calculate_cycle_stats()
     bar, percent = get_progress_bar()
 
-    # Вивід у консоль
+    # Console output
     render_cli(timers, price=price, lang=args.lang)
 
     # Telegram
@@ -31,3 +31,6 @@ def main():
             progress=percent,
             lang=args.lang
         )
+
+# Експорт функцій
+__all__ = ['main']

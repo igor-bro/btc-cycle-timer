@@ -22,14 +22,14 @@ def localize(key: str, lang: str = "en") -> str:
 def render_cli(timers: dict, price: float, lang: str):
     console = Console()
     
-    # Дати для таблиці
+    # Dates for table
     dates = {
         "halving": NEXT_HALVING.strftime("%Y-%m-%d"),
         "peak": CYCLE_PEAK.strftime("%Y-%m-%d"),
         "bottom": CYCLE_BOTTOM.strftime("%Y-%m-%d")
     }
 
-    # Таймери
+    # Timers
     table = Table(title=f"📅 {localize('app.title', lang)}")
     table.add_column(localize("table.label", lang))
     table.add_column(localize("table.value", lang))
@@ -41,12 +41,12 @@ def render_cli(timers: dict, price: float, lang: str):
 
     console.print(table)
 
-    # Прогрес
+    # Progress
     bar, percent = get_progress_bar()
     console.print(f"\n[bold magenta]{localize('progress.title', lang)}: {percent:.2f}%[/bold magenta]")
     console.print(f"[green]{bar}[/green]")
 
-    # Статистика
+    # Statistics
     console.print(f"\n📊 {localize('telegram.stats', lang)}:")
     stats = calculate_cycle_stats()
 
@@ -59,3 +59,6 @@ def render_cli(timers: dict, price: float, lang: str):
         else:
             formatted = str(round(value, 2))
         console.print(f"▪️ {label}: [cyan]{formatted}[/cyan]")
+
+# Експорт функцій
+__all__ = ['localize', 'render_cli']

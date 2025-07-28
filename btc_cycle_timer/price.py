@@ -4,11 +4,7 @@ import os
 import pandas as pd
 import requests
 from datetime import datetime
-
-BINANCE_URL = "https://api.binance.com/api/v3/klines"
-SYMBOL = "BTCUSDT"
-INTERVAL = "1d"
-LIMIT = 366  
+from .config import BINANCE_URL, SYMBOL, INTERVAL, LIMIT  
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -28,8 +24,15 @@ def get_btc_price():
         kline = response.json()[0]
         price = float(kline[4])
         return price
-    except Exception:
-        # Якщо API недоступний — беремо останню ціну з CSV
+    except requests.RequestException as e:
+        print(f"⚠️ Binance API недоступний: {e}")
+    except (KeyError, IndexError, ValueError) as e:
+        print(f"⚠️ Помилка обробки даних API: {e}")
+    except Exception as e:
+        print(f"⚠️ Неочікувана помилка: {e}")
+    
+            # If API is unavailable — take the last price from CSV
+    try:
         files = [f for f in os.listdir(DATA_DIR) if f.startswith("btc_price_") and f.endswith(".csv")]
         dfs = []
         for f in files:
@@ -40,8 +43,10 @@ def get_btc_price():
         if dfs:
             all_df = pd.concat(dfs).sort_values("date")
             return float(all_df["price"].iloc[-1])
-        else:
-            return None
+    except Exception as e:
+        print(f"⚠️ Помилка завантаження CSV даних: {e}")
+    
+    return None
 
 def fetch_btc_data(start_year: int, end_year: int):
     for year in range(start_year, end_year + 1):
@@ -84,6 +89,9 @@ def fetch_btc_data(start_year: int, end_year: int):
             print(f"❌ Error loading {year}: {e}")
 
 
+# Експорт функцій
+__all__ = ['get_btc_price', 'fetch_btc_data']
+
 if __name__ == "__main__":
-    # Збираємо дані з 2020 по 2025 рік
+    # Collect data from 2020 to 2025
     fetch_btc_data(start_year=2020, end_year=2025)

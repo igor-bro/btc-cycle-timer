@@ -2,17 +2,34 @@
   "app.title": "Bitcoin 4-Year Cycle Timer",
   "table.label": "Metric",
   "table.value": "Value",
+
   "timer.halving": "Until next halving",
   "timer.peak": "Until forecasted peak",
   "timer.bottom": "Until forecasted bottom",
+
   "chart.title": "📈 Phases of BTC 4-Year Cycle",
-  "disclaimer": "⚠️ This is an educational tool. Not financial advice. Past performance does not guarantee future results.",
   "chart.x_axis": "Date",
   "chart.y_axis": "Phase",
-  "chart.legend": "Phases",
-  "progress.title": "📉 Cycle Progress",
-  "progress.caption": "{percent}% of the path to peak completed",
-  "telegram.stats": "Cycle Stats and Forecastes",
+
+  "line.btc_price": "BTC Price",
+  "line.prev_bottom": "Previous Bottom Level",
+  "line.forecasted_peak_level": "Forecasted Peak Level",
+  "line.forecasted_bottom_level": "Forecasted Bottom Level",
+  "line.projected_pattern": "Projected pattern",
+
+  "event.bottom": "📉 Bottom",
+  "event.halving": "📆 Halving",
+  "event.peak": "🚀 Forecasted Peak",
+  "event.bottom_forecast": "📉 Forecasted Bottom",
+
+  "phase.accumulation": "Accumulation",
+  "phase.parabolic": "Parabolic",
+  "phase.distribution": "Distribution",
+  "phase.capitulation": "Capitulation",
+
+  "disclaimer": "⚠️ This is an educational tool. Not financial advice. Past performance does not guarantee future results.",
+
+  "telegram.stats": "Cycle Stats and Forecasts",
   "stats.days_from_bottom": "Days since bottom",
   "stats.percent_progress": "Progress to peak",
   "stats.roi_from_bottom": "ROI from bottom",
@@ -21,7 +38,16 @@
   "stats.forecast_peak_price": "Forecasted peak price",
   "stats.forecast_bottom_price": "Forecasted bottom price",
   "price.current": "Current price",
+
+  "progress.title": "📉 Cycle Progress",
+  "progress.caption": "{percent}% of the path to peak completed",
+
   "unit.days": "days",
-  "chart.price": "BTC Price",
+  "chart.legend": "Phases",
+
+  "chart.show_pattern_projection": "Show pattern projection",
+  "chart.show_pattern_projection.tooltip": "Enable to show the projected pattern based on historical cycles",
+  "line.pattern_projection": "Pattern projection",
+
   "footer.analogy": "An analogy to understand: Imagine you're planning a train journey. The 'BTC Cycle Timer' is your personal interactive schedule, not only showing the current time, but also forecasting when the train will arrive at the 'peak' station, reach the 'bottom', and make the next 'refueling stop' (halving). It also provides a route map (cycle chart) and a passenger handbook (analytical sections), explaining possible influencing factors and reminding you this is just a forecast – not a guaranteed timetable."
 }

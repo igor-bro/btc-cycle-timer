@@ -14,7 +14,7 @@ def send_telegram_message(timers: dict, price: float, stats: dict, progress: flo
     token = os.getenv("TELEGRAM_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
-    # Локалізовані заголовки
+    # Localized headers
     title = escape_md(localize("app.title", lang))
     halving = escape_md(localize("timer.halving", lang))
     peak = escape_md(localize("timer.peak", lang))
@@ -24,14 +24,14 @@ def send_telegram_message(timers: dict, price: float, stats: dict, progress: flo
     progress_title = escape_md(localize("progress.title", lang))
     unit_days = escape_md(localize("unit.days", lang))
 
-    # Таймери з емодзі
+    # Timers with emoji
     timer_text = (
         f"🟦 *{halving}*: `{timers['halving']}` {unit_days}\n"
         f"🟩 *{peak}*: `{timers['peak']}` {unit_days}\n"
         f"🟥 *{bottom}*: `{timers['bottom']}` {unit_days}"
     )
 
-    # Статистика (ROI, дні, ціни)
+    # Statistics (ROI, days, prices)
     stat_lines = []
     for key, value in stats.items():
         label = escape_md(localize(f"stats.{key}", lang))
@@ -44,7 +44,7 @@ def send_telegram_message(timers: dict, price: float, stats: dict, progress: flo
         stat_lines.append(f"• *{label}*: `{formatted}`")
     stats_block = "\n".join(stat_lines)
 
-    # Повне повідомлення
+    # Complete message
     text = (
         f"*📅 {title}*\n\n"
         f"{timer_text}\n\n"
@@ -64,3 +64,6 @@ def send_telegram_message(timers: dict, price: float, stats: dict, progress: flo
     response = requests.post(url, data=payload)
     if not response.ok:
         raise Exception(f"Telegram error: {response.text}")
+
+# Експорт функцій
+__all__ = ['send_telegram_message', 'escape_md']

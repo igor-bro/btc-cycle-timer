@@ -1,26 +1,27 @@
 # BTC Cycle Timer 🕰️📈
 
-**Освітній інструмент**, що візуалізує часову структуру ринку Біткоїна, ґрунтуючись на 4-річних циклах та халвінгах.
+**Educational tool** that visualizes the temporal structure of the Bitcoin market based on 4-year cycles and halvings.
 
 ---
 
-## 🔧 Основні функції
+## 🔧 Key Features
 
-- ⏳ Таймери до:
-  - Наступного халвінгу (орієнтовно квітень 2028)
-  - Прогнозованого піку циклу (~жовтень 2025)
-  - Прогнозованого дна циклу (~кінець 2026)
-- 📉 Графік середнього циклу BTC з фазами (Accumulation, Parabolic, Distribution, Capitulation)
-- 📈 Калькулятор прибутковості на основі минулих циклів
-- 📊 Прогрес-бар проходження поточного циклу
-- 🌐 Web-інтерфейс (Streamlit) та CLI з живим оновленням (`rich.live`)
-- 🔄 Мультимовність: `ua`, `en`, `fr`
-- 🤖 Telegram-бот (опційно)
-- 🛠️ Підтримка .env (секретів) і Hugging Face Spaces
+- ⏳ Timers to:
+  - Next halving (approximately April 2028)
+  - Forecasted cycle peak (~October 2025)
+  - Forecasted cycle bottom (~end of 2026)
+- 📉 BTC average cycle chart with phases (Accumulation, Parabolic, Distribution, Capitulation)
+- 📈 Profitability calculator based on past cycles
+- 📊 Progress bar for current cycle completion
+- 🌐 Web interface (Streamlit) and CLI with live updates (`rich.live`)
+- 🔄 Multilingual support: `ua`, `en`, `fr`
+- 🤖 Telegram bot (optional)
+- 🛠️ .env support (secrets) and Hugging Face Spaces
+- 📊 **Pattern projection** - historical pattern visualization based on previous cycles
 
 ---
 
-## 🚀 Запуск локально
+## 🚀 Local Setup
 
 ```bash
 git clone https://github.com/your-username/btc-cycle-timer.git
@@ -28,21 +29,19 @@ cd btc-cycle-timer
 pip install -r requirements.txt
 ```
 
-````
-
-**Запуск CLI:**
+**CLI Launch:**
 
 ```bash
 python btc_cycle_timer/main.py --lang=ua
 ```
 
-Або, якщо встановлено як пакет:
+Or, if installed as a package:
 
 ```bash
 btc-cycle --lang=ua
 ```
 
-**Запуск веб-версії:**
+**Web Version Launch:**
 
 ```bash
 streamlit run btc_cycle_timer/app.py
@@ -50,21 +49,21 @@ streamlit run btc_cycle_timer/app.py
 
 ---
 
-## 🌍 Розгортання у Hugging Face Spaces
+## 🌍 Deployment on Hugging Face Spaces
 
-1. Fork цей репозиторій
-2. Створи новий Space → обери шаблон `Streamlit`
-3. Підключи GitHub репозиторій
-4. Додай у Settings → Secrets:
+1. Fork this repository
+2. Create a new Space → choose `Streamlit` template
+3. Connect GitHub repository
+4. Add in Settings → Secrets:
 
    - `TELEGRAM_TOKEN`
    - `TELEGRAM_CHAT_ID`
 
-5. Автоматичне оновлення після пушу до `main`
+5. Automatic update after push to `main`
 
 ---
 
-## 🧪 Змінні середовища (`.env`)
+## 🧪 Environment Variables (`.env`)
 
 ```env
 TELEGRAM_TOKEN=...
@@ -75,14 +74,32 @@ DEBUG=false
 
 ---
 
-## 📄 Ліцензія
+## 📄 License
 
 MIT License
 
 ---
 
-## 📬 Автор
+## 📬 Author
 
-Ігор Кушнерук · [BTC Cycle Timer on GitHub](https://github.com/igor-bro/btc-cycle-timer)
+Igor Kushneruk · [BTC Cycle Timer on GitHub](https://github.com/igor-bro/btc-cycle-timer)
 
-````
+---
+
+## 🔄 Version History
+
+### v0.1.1 (Current)
+
+- ✅ **Pattern projection** - shows historical price patterns projected onto current cycle
+- ✅ **Extended view** - displays 180 days from current date with full cycle visualization
+- ✅ **Improved error handling** - silent error handling for production
+- ✅ **Code cleanup** - removed debug outputs and Ukrainian comments
+- ✅ **English comments** - all code comments now in English
+- ✅ **Optimized performance** - reduced data loading operations
+
+### v0.1.0
+
+- Initial release with basic cycle timer functionality
+- CLI and web interface
+- Multilingual support
+- Telegram bot integration
