@@ -103,3 +103,10 @@ Igor Kushneruk · [BTC Cycle Timer on GitHub](https://github.com/igor-bro/btc-cy
 - CLI and web interface
 - Multilingual support
 - Telegram bot integration
+
+---
+
+## 📚 Additional Documentation
+
+- [API Documentation](API.md) - Complete API reference
+- [Test Report](tests/report.md) - Detailed testing results
