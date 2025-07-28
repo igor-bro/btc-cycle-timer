@@ -1,0 +1,49 @@
+{
+  "current_phase": "distribution",
+  "statistics": {
+    "error": "No cycle history available"
+  },
+  "recommendations": {
+    "strategy": "Consider taking profits gradually",
+    "risk_level": "High",
+    "timeframe": "Short-term (3-6 months)",
+    "key_indicators": [
+      "Price volatility",
+      "Divergence patterns",
+      "Smart money selling"
+    ]
+  },
+  "future_cycles": [
+    {
+      "cycle_number": 1,
+      "peak_date": "2029-10-10",
+      "bottom_date": "2030-10-29",
+      "halving_date": "2028-04-20"
+    },
+    {
+      "cycle_number": 2,
+      "peak_date": "2033-10-09",
+      "bottom_date": "2034-10-28",
+      "halving_date": "2032-04-19"
+    },
+    {
+      "cycle_number": 3,
+      "peak_date": "2037-10-08",
+      "bottom_date": "2038-10-27",
+      "halving_date": "2036-04-18"
+    },
+    {
+      "cycle_number": 4,
+      "peak_date": "2041-10-07",
+      "bottom_date": "2042-10-26",
+      "halving_date": "2040-04-17"
+    },
+    {
+      "cycle_number": 5,
+      "peak_date": "2045-10-06",
+      "bottom_date": "2046-10-25",
+      "halving_date": "2044-04-16"
+    }
+  ],
+  "export_date": "2025-07-28T17:01:46.015770"
+}

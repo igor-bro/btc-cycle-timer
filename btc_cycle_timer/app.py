@@ -6,6 +6,10 @@ from btc_cycle_timer.calc import calculate_cycle_stats
 from btc_cycle_timer.status import get_progress_bar
 from datetime import datetime, timedelta
 from btc_cycle_timer.chart import plot_pattern_projection
+from btc_cycle_timer.logger import logger
+from btc_cycle_timer.cycle_analysis import cycle_analyzer
+from btc_cycle_timer.dynamic_predictor import dynamic_predictor
+from btc_cycle_timer.forecast_updater import forecast_updater
 
 
 
@@ -224,6 +228,7 @@ selected_label = st.selectbox(
 # Update language
 lang = lang_options[selected_label]
 st.session_state["lang"] = lang
+logger.info(f"Selected language: {lang}")
 
 
 # --- Data ---
@@ -234,6 +239,7 @@ stats = calculate_cycle_stats()
 st.markdown(f"<h1>{localize('app.title', lang)}</h1>", unsafe_allow_html=True)
 
 # --- Timers block ---
+logger.info("Rendering timers block")
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 timer_cols = st.columns(3)
 colors = {"halving": "#1E90FF", "peak": "#28a745", "bottom": "#e74c3c"}
@@ -255,6 +261,7 @@ for i, key in enumerate(["halving", "peak", "bottom"]):
             + "</div>", unsafe_allow_html=True)
 
 # --- Progress Bar ---
+logger.info("Rendering progress bar")
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 st.markdown(f"<h4> {localize('progress.title', lang)}</h4>", unsafe_allow_html=True)
 bar, percent = get_progress_bar()
@@ -267,6 +274,7 @@ progress_bar_html = f"""
 st.markdown(progress_bar_html, unsafe_allow_html=True)
 
 # --- Chart of cycle phases ---
+logger.info("Rendering chart of cycle phases")
 st.markdown("""
     <style>
     .full-width-chart .element-container {
@@ -280,13 +288,25 @@ st.markdown("""
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 st.markdown('<div class="full-width-chart">', unsafe_allow_html=True)
 
-fig = plot_cycle_phases(lang=lang, show_projection=show_pattern_projection)
+fig = plot_cycle_phases(lang=lang, show_projection=True)
 
 st.plotly_chart(fig, use_container_width=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # --- Pattern projection checkbox (centered below chart) ---
+logger.info("Rendering pattern projection checkbox")
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
+st.markdown("""
+    <style>
+    .centered-checkbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1em 0;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     show_pattern_projection = st.checkbox(
@@ -297,6 +317,7 @@ with col2:
 
 
 # --- Cycle stats ---
+logger.info("Rendering cycle stats block")
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 st.markdown(f"<h4 style='margin-top: 2em;'>{localize('telegram.stats', lang)}</h4>", unsafe_allow_html=True)
 stat_cols = st.columns(3)
@@ -334,7 +355,119 @@ for col, blocks in zip(stat_cols, stat_blocks):
                 </div>
             """, unsafe_allow_html=True)
 
+# --- Cycle Analysis Section ---
+logger.info("Rendering cycle analysis section")
+st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
+st.markdown(f"<h4 style='margin-top: 2em;'>🔄 {localize('cycle.analysis', lang, default='Cycle Analysis')}</h4>", unsafe_allow_html=True)
+
+# Get current cycle info
+try:
+    current_cycle_info = cycle_analyzer.get_current_cycle_info()
+    cycle_structure = cycle_analyzer.get_cycle_structure()
+    
+    # Display current cycle info
+    cycle_cols = st.columns(2)
+    with cycle_cols[0]:
+        st.markdown(f"""
+            <div class="stat-card stat-blue">
+                <div class="stat-label">
+                    <span class="stat-icon">📊</span>Current Cycle
+                </div>
+                <div class="stat-value" style="color:#1E90FF;">{current_cycle_info['cycle_number']}</div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+            <div class="stat-card stat-green">
+                <div class="stat-label">
+                    <span class="stat-icon">⏰</span>Cycle Progress
+                </div>
+                <div class="stat-value" style="color:#28a745;">{current_cycle_info['progress_percent']:.1f}%</div>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with cycle_cols[1]:
+        st.markdown(f"""
+            <div class="stat-card stat-neutral">
+                <div class="stat-label">
+                    <span class="stat-icon">🗓️</span>Days Elapsed
+                </div>
+                <div class="stat-value" style="color:#fff;">{current_cycle_info['days_elapsed']}</div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+            <div class="stat-card stat-neutral">
+                <div class="stat-label">
+                    <span class="stat-icon">🔮</span>Days Remaining
+                </div>
+                <div class="stat-value" style="color:#fff;">{current_cycle_info['days_remaining']}</div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+except Exception as e:
+    logger.error(f"Error displaying cycle analysis: {e}")
+    st.warning("Cycle analysis data unavailable")
+
+# --- ML Predictions Section ---
+logger.info("Rendering ML predictions section")
+st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
+st.markdown(f"<h4 style='margin-top: 2em;'>🤖 {localize('ml.predictions', lang, default='ML Predictions')}</h4>", unsafe_allow_html=True)
+
+# Get ML predictions
+try:
+    ml_prediction = dynamic_predictor.make_ensemble_prediction()
+    if ml_prediction:
+        pred_cols = st.columns(2)
+        with pred_cols[0]:
+            st.markdown(f"""
+                <div class="stat-card stat-gold">
+                    <div class="stat-label">
+                        <span class="stat-icon">💰</span>Predicted Price (30d)
+                    </div>
+                    <div class="stat-value" style="color:#e6b800;">${ml_prediction['ensemble_prediction']:,.0f}</div>
+                </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+                <div class="stat-card stat-green">
+                    <div class="stat-label">
+                        <span class="stat-icon">📈</span>Expected Change
+                    </div>
+                    <div class="stat-value" style="color:#28a745;">{ml_prediction['predicted_change']:+.1f}%</div>
+                </div>
+            """, unsafe_allow_html=True)
+        
+        with pred_cols[1]:
+            st.markdown(f"""
+                <div class="stat-card stat-blue">
+                    <div class="stat-label">
+                        <span class="stat-icon">🎯</span>Model Agreement
+                    </div>
+                    <div class="stat-value" style="color:#1E90FF;">{ml_prediction['model_agreement']:.1%}</div>
+                </div>
+            """, unsafe_allow_html=True)
+            
+            # Display confidence interval
+            conf_lower = ml_prediction['confidence_interval'][0]
+            conf_upper = ml_prediction['confidence_interval'][1]
+            st.markdown(f"""
+                <div class="stat-card stat-neutral">
+                    <div class="stat-label">
+                        <span class="stat-icon">📊</span>Confidence Range
+                    </div>
+                    <div class="stat-value" style="color:#fff;">${conf_lower:,.0f} - ${conf_upper:,.0f}</div>
+                </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.warning("ML predictions unavailable - models may need training")
+        
+except Exception as e:
+    logger.error(f"Error displaying ML predictions: {e}")
+    st.warning("ML predictions data unavailable")
+
 # --- Disclaimer ---
+logger.info("Rendering disclaimer and footer")
 st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
 st.markdown("---")
 st.markdown(f"<div class='disclaimer'>{localize('disclaimer', lang)}</div>", unsafe_allow_html=True)
@@ -342,3 +475,5 @@ st.markdown(f"<div class='disclaimer'>{localize('disclaimer', lang)}</div>", uns
 st.markdown("---")
 # --- Analogy text (footer.analogy) ---
 st.markdown(f"<div class='disclaimer' style='margin-top: 2em;'>{localize('footer.analogy', lang)}</div>", unsafe_allow_html=True)
+
+logger.info("Streamlit BTC Cycle Timer app finished.")

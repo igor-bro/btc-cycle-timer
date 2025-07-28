@@ -2,15 +2,17 @@ import os
 import requests
 from dotenv import load_dotenv
 from btc_cycle_timer.utils import localize
+from btc_cycle_timer.logger import logger
 
 load_dotenv()
 
 def escape_md(text: str) -> str:
-    """Екранує спецсимволи для Markdown v2"""
+    """Escapes special characters for Markdown v2"""
     escape_chars = r"\_*[]()~`>#+-=|{}.!"
     return ''.join(f"\\{c}" if c in escape_chars else c for c in str(text))
 
 def send_telegram_message(timers: dict, price: float, stats: dict, progress: float, lang: str):
+    logger.info(f"Sending Telegram message (lang={lang})")
     token = os.getenv("TELEGRAM_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
@@ -64,6 +66,7 @@ def send_telegram_message(timers: dict, price: float, stats: dict, progress: flo
     response = requests.post(url, data=payload)
     if not response.ok:
         raise Exception(f"Telegram error: {response.text}")
+    logger.info("Telegram message sent successfully")
 
-# Експорт функцій
+# Export functions
 __all__ = ['send_telegram_message', 'escape_md']

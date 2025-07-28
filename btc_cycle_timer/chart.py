@@ -17,8 +17,10 @@ from .config import (
     PREVIOUS_CYCLE_PEAK
 )
 from .calc import get_current_btc_price
+from btc_cycle_timer.logger import logger
 
 def load_price_data(data_dir=None):
+    logger.debug("Loading price data from CSV files...")
     if data_dir is None:
         data_dir = os.path.join(os.path.dirname(__file__), "data")
     all_files = sorted(glob(os.path.join(data_dir, "btc_price_*.csv")))
@@ -28,21 +30,32 @@ def load_price_data(data_dir=None):
         df = pd.read_csv(f)
         if "date" in df.columns and "close" in df.columns:
             df["date"] = pd.to_datetime(df["date"])
-            df = df[["date", "close"]]
+            # Keep all available columns for ML features
+            required_columns = ["date", "close"]
+            available_columns = [col for col in required_columns if col in df.columns]
+            if "high" in df.columns and "low" in df.columns:
+                available_columns.extend(["high", "low"])
+            if "volume" in df.columns:
+                available_columns.append("volume")
+            df = df[available_columns]
             dfs.append(df)
 
     if not dfs:
         raise ValueError("No valid price data files found.")
 
-    return pd.concat(dfs).sort_values("date")
+    df = pd.concat(dfs).sort_values("date")
+    logger.info(f"Loaded {len(df)} rows of price data")
+    return df
 
 def get_price_on(date: datetime, df: pd.DataFrame) -> float:
+    logger.debug(f"Getting price for date: {date}")
     nearest = df[df["date"] <= date]
     if not nearest.empty:
         return float(nearest.iloc[-1]["close"])
     return None
 
 def plot_cycle_phases(lang="en", show_projection=False):
+    logger.info(f"Building cycle phases chart (lang={lang}, show_projection={show_projection})")
     df_price = load_price_data()
 
     today = datetime.now()
@@ -166,12 +179,12 @@ def plot_cycle_phases(lang="en", show_projection=False):
         if mid_price:
             fig.add_annotation(
                 x=mid_date,
-                y=mid_price * 0.85,  # Переміщуємо нижче
+                y=mid_price * 0.85,  # Move lower
                 text=f"⏳ {days_text} → ",
                 showarrow=True,
                 arrowhead=1,
                 ax=0,
-                ay=-30,  # Стрілка вниз
+                ay=-30,  # Arrow down
                 font=dict(color="orange", size=10),
                 bgcolor="black",
                 opacity=0.8
@@ -195,10 +208,11 @@ def plot_cycle_phases(lang="en", show_projection=False):
         yaxis=dict(tick0=0, dtick=20000, showgrid=True, gridcolor="#222"),
         xaxis=dict(tickformat="%b\n%Y\n", dtick="M1", showgrid=True, gridcolor="#222", nticks=12, tickangle=45)
     )
-
+    logger.debug(f"Chart built with {len(fig.data)} traces")
     return fig
 
 def plot_pattern_projection(fig, df, lang="en"):
+    logger.info("Plotting pattern projection...")
     try:
         forecast = get_forecast_dates()
         forecast_peak = forecast.get("peak")
@@ -250,10 +264,11 @@ def plot_pattern_projection(fig, df, lang="en"):
             line=dict(color="cyan", dash="dot", width=2),
             opacity=0.8
         ))
+        logger.info(f"Pattern projection added: {len(pattern_df)} points")
 
     except Exception as e:
-        # Silent error handling for production
+        logger.error(f"Pattern projection error: {e}")
         pass
 
-# Експорт функцій
+# Export functions
 __all__ = ['plot_cycle_phases', 'plot_pattern_projection', 'load_price_data', 'get_price_on']

@@ -9,5 +9,5 @@ def get_progress_bar(length=30) -> tuple[str, float]:
     bar = "█" * filled_length + "░" * (length - filled_length)
     return bar, percent
 
-# Експорт функцій
+# Export functions
 __all__ = ['get_progress_bar']

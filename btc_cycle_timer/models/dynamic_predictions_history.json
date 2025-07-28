@@ -1,0 +1,36 @@
+[
+  {
+    "current_price": 107296.79,
+    "ensemble_prediction": 51105.89418706292,
+    "individual_predictions": {
+      "random_forest": 38235.12269999999,
+      "gradient_boosting": 42592.82920302587,
+      "linear": 93873.56712926288
+    },
+    "predicted_change": -52.369596343876715,
+    "confidence_interval": [
+      1588.8294951164717,
+      100622.95887900937
+    ],
+    "prediction_date": "2025-07-28T18:35:28.997473",
+    "target_date": "2025-08-27T18:35:28.997473",
+    "model_agreement": 0.5056576365961608
+  },
+  {
+    "current_price": 107296.79,
+    "ensemble_prediction": 51105.89418706292,
+    "individual_predictions": {
+      "random_forest": 38235.12269999999,
+      "gradient_boosting": 42592.82920302587,
+      "linear": 93873.56712926288
+    },
+    "predicted_change": -52.369596343876715,
+    "confidence_interval": [
+      1588.8294951164717,
+      100622.95887900937
+    ],
+    "prediction_date": "2025-07-28T18:35:29.476099",
+    "target_date": "2025-08-27T18:35:29.476099",
+    "model_agreement": 0.5056576365961608
+  }
+]

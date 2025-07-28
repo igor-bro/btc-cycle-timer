@@ -1,6 +1,6 @@
 from btc_cycle_timer.main import main
 
-# Експорт функцій
+# Export functions
 __all__ = []
 
 if __name__ == '__main__':

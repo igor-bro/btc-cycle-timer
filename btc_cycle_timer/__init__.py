@@ -1,4 +1,4 @@
-# Основні експорти пакету
+# Main package exports
 from .timer import get_all_timers, get_timer_dates, get_forecast_dates
 from .price import get_btc_price, fetch_btc_data
 from .calc import calculate_cycle_stats, get_current_btc_price
@@ -8,7 +8,7 @@ from .chart import plot_cycle_phases, plot_pattern_projection
 from .telegram import send_telegram_message
 
 __version__ = "0.1.0"
-__author__ = "Ігор Кушнерук"
+__author__ = "Igor Kushneruk"
 
 __all__ = [
     'get_all_timers', 'get_timer_dates', 'get_forecast_dates',

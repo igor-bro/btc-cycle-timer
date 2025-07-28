@@ -32,5 +32,5 @@ def main():
             lang=args.lang
         )
 
-# Експорт функцій
+# Export functions
 __all__ = ['main']

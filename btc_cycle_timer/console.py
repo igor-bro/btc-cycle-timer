@@ -9,5 +9,5 @@ success = lambda msg: console.print(f"[bold green]✔ {msg}[/bold green]")
 info = lambda msg: console.print(f"[bold cyan]ℹ {msg}[/bold cyan]")
 error = lambda msg: console.print(f"[bold red]✘ {msg}[/bold red]")
 
-# Експорт функцій та класів
+# Export functions and classes
 __all__ = ["console", "success", "info", "error", "Table", "Columns"]

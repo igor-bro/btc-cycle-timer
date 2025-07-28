@@ -61,10 +61,10 @@ def test_language_keys_completeness(lang):
         assert key in translations, f"Missing key in {lang}.json: {key}"
 
 def test_module_exports():
-    """Перевіряє, що всі модулі правильно експортують функції"""
+    """Checks that all modules correctly export functions"""
     import btc_cycle_timer
     
-    # Перевіряємо основні експорти
+    # Check main exports
     assert hasattr(btc_cycle_timer, 'get_all_timers')
     assert hasattr(btc_cycle_timer, 'get_btc_price')
     assert hasattr(btc_cycle_timer, 'calculate_cycle_stats')
@@ -74,18 +74,18 @@ def test_module_exports():
     assert hasattr(btc_cycle_timer, 'send_telegram_message')
 
 def test_price_function_unification():
-    """Перевіряє, що функції отримання ціни уніфіковані"""
+    """Checks that price retrieval functions are unified"""
     from btc_cycle_timer.calc import get_current_btc_price
     from btc_cycle_timer.price import get_btc_price
     
-    # Обидві функції повинні повертати однаковий результат
+    # Both functions should return the same result
     price1 = get_current_btc_price()
     price2 = get_btc_price()
     
-    assert price1 == price2, "Функції отримання ціни повинні повертати однаковий результат"
+    assert price1 == price2, "Price retrieval functions should return the same result"
 
 def test_centralized_config():
-    """Перевіряє, що всі важливі константи централізовані в config.py"""
+    """Checks that all important constants are centralized in config.py"""
     from btc_cycle_timer.config import (
         LAST_HALVING, NEXT_HALVING, CYCLE_PEAK, CYCLE_BOTTOM,
         CYCLE_BOTTOM_DATE, FORECAST_PEAK_DATE, FORECAST_BOTTOM_DATE,
@@ -93,7 +93,7 @@ def test_centralized_config():
         BINANCE_URL, SYMBOL, INTERVAL, LIMIT
     )
     
-    # Перевіряємо, що всі константи існують
+    # Check that all constants exist
     assert LAST_HALVING is not None
     assert NEXT_HALVING is not None
     assert CYCLE_PEAK is not None
@@ -110,11 +110,11 @@ def test_centralized_config():
     assert LIMIT is not None
 
 def test_config_consistency():
-    """Перевіряє узгодженість дат між різними модулями"""
+    """Checks date consistency between different modules"""
     from btc_cycle_timer.config import CYCLE_PEAK, FORECAST_PEAK_DATE
     from btc_cycle_timer.timer import get_forecast_dates
     
-    # Перевіряємо, що дати узгоджені
+    # Check that dates are consistent
     forecast_dates = get_forecast_dates()
     assert "peak" in forecast_dates
     assert "bottom" in forecast_dates

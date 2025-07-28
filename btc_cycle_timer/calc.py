@@ -6,16 +6,19 @@ from .config import (
     CYCLE_BOTTOM_DATE, FORECAST_PEAK_DATE, BOTTOM_PRICE, PEAK_PRICE,
     FORECAST_PEAK_PRICE, FORECAST_BOTTOM_PRICE
 )
+from btc_cycle_timer.logger import logger
 
-# Експорт функцій
+# Export functions
 __all__ = ['get_current_btc_price', 'calculate_cycle_stats']
 
 
 def get_current_btc_price() -> float:
-    """Аліас для get_btc_price з модуля price"""
+    """Alias for get_btc_price from price module"""
+    logger.info("Getting current BTC price (alias)")
     return get_btc_price() 
 
 def calculate_cycle_stats():
+    logger.info("Calculating cycle statistics...")
     today = datetime.now()
     current_price = get_current_btc_price()
     if current_price is None:

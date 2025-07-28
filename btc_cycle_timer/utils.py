@@ -5,9 +5,11 @@ from rich.console import Console
 from btc_cycle_timer.status import get_progress_bar
 from btc_cycle_timer.calc import calculate_cycle_stats
 from btc_cycle_timer.config import NEXT_HALVING, CYCLE_PEAK, CYCLE_BOTTOM
+from btc_cycle_timer.logger import logger
 
 
-def localize(key: str, lang: str = "en") -> str:
+def localize(key: str, lang: str = "en", **kwargs) -> str:
+    logger.debug(f"Localizing key: {key} for lang: {lang}")
     path = Path(__file__).parent / f"lang/{lang}.json"
     if not path.exists():
         return key
@@ -20,6 +22,7 @@ def localize(key: str, lang: str = "en") -> str:
 
 
 def render_cli(timers: dict, price: float, lang: str):
+    logger.info("Rendering CLI output")
     console = Console()
     
     # Dates for table
@@ -60,5 +63,5 @@ def render_cli(timers: dict, price: float, lang: str):
             formatted = str(round(value, 2))
         console.print(f"▪️ {label}: [cyan]{formatted}[/cyan]")
 
-# Експорт функцій
+# Export functions
 __all__ = ['localize', 'render_cli']
