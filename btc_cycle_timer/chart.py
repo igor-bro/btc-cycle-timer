@@ -45,7 +45,7 @@ def get_price_on(date: datetime, df: pd.DataFrame) -> float:
 def plot_cycle_phases(lang="en", show_projection=False):
     df_price = load_price_data()
 
-    today = datetime.utcnow()
+    today = datetime.now()
     max_date = today + timedelta(days=180)
 
     df_price = df_price[(df_price["date"] >= CYCLE_BOTTOM_DATE) & (df_price["date"] <= max_date)]
@@ -166,12 +166,12 @@ def plot_cycle_phases(lang="en", show_projection=False):
         if mid_price:
             fig.add_annotation(
                 x=mid_date,
-                y=mid_price * 1.05,
+                y=mid_price * 0.85,  # Переміщуємо нижче
                 text=f"⏳ {days_text} → ",
                 showarrow=True,
                 arrowhead=1,
                 ax=0,
-                ay=50,
+                ay=-30,  # Стрілка вниз
                 font=dict(color="orange", size=10),
                 bgcolor="black",
                 opacity=0.8
@@ -205,7 +205,7 @@ def plot_pattern_projection(fig, df, lang="en"):
         if not forecast_peak:
             return
 
-        today = datetime.utcnow()
+        today = datetime.now()
         days_to_peak = (forecast_peak - today).days
         
         if days_to_peak <= 0:

@@ -28,7 +28,7 @@ def get_forecast_dates():
         "peak": FORECAST_PEAK_DATE,
         "bottom": FORECAST_BOTTOM_DATE,
     }
-    now = datetime.utcnow()
+    now = datetime.now()
     return {
         key: now + timedelta(days=delta.total_seconds() / 86400)
         if (delta := (date - now)).total_seconds() > 0 else date

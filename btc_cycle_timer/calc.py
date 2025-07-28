@@ -16,7 +16,7 @@ def get_current_btc_price() -> float:
     return get_btc_price() 
 
 def calculate_cycle_stats():
-    today = datetime.utcnow()
+    today = datetime.now()
     current_price = get_current_btc_price()
     if current_price is None:
         return {

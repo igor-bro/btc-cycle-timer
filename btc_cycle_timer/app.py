@@ -266,13 +266,6 @@ progress_bar_html = f"""
 """
 st.markdown(progress_bar_html, unsafe_allow_html=True)
 
-# --- Optional: Add pattern projection ---
-show_pattern_projection = st.checkbox(
-    localize("chart.show_pattern_projection", lang),
-    value=True,
-    help=localize("chart.show_pattern_projection.tooltip", lang, default="Enable to show the projected pattern based on historical cycles.")
-)
-
 # --- Chart of cycle phases ---
 st.markdown("""
     <style>
@@ -291,6 +284,16 @@ fig = plot_cycle_phases(lang=lang, show_projection=show_pattern_projection)
 
 st.plotly_chart(fig, use_container_width=True)
 st.markdown('</div>', unsafe_allow_html=True)
+
+# --- Pattern projection checkbox (centered below chart) ---
+st.markdown("<div class='block-spacer'></div>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    show_pattern_projection = st.checkbox(
+        localize("chart.show_pattern_projection", lang),
+        value=True,
+        help=localize("chart.show_pattern_projection.tooltip", lang, default="Enable to show the projected pattern based on historical cycles.")
+    )
 
 
 # --- Cycle stats ---
